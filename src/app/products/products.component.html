@@ -1,0 +1,79 @@
+<!-- Page Content -->
+
+<div *ngIf="isLoading" class="text-center mt-5">
+    <div class="spinner-border" role="status">    
+    </div>
+    <br/>
+    <h5>Carregando Produtos...</h5>
+</div>
+
+<div *ngIf="!isLoading" >
+<div class="card mt-3" *ngFor="let item of produtos">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-2">
+                <img src="/assets/{{item.foto}}" class="img-fluid" />
+            </div>
+            <div class="col-md-10">
+                <h5>{{item.nome}}</h5>
+                Preço: <strong>{{item.preco | currency: 'R$ '}}</strong>
+                <br />
+                Quantidade disponível: <strong>{{item.quantidade}}
+                </strong>
+                <br /><br />
+                <button class="btn btn-sm btn-outline-secondary"  data-toggle="modal" data-target="#modal-detalhes"
+                    (click)="obterPorId(item.idProduto)">
+                    Ver detalhes
+                </button>
+                &nbsp;
+                <button class="btn btn-sm btn-success" (click)="adicionarItem(item)">
+                    Adicionar ao Pedido
+                </button>
+            </div>            
+        </div>        
+    </div>
+    <br /><br />
+</div>
+</div>
+
+<!-- modal para exibir detalhes do produto -->
+<div id="modal-detalhes" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="isLoadingItem">
+            <div class="modal-body">
+                <div class="spinner-border" role="status">    
+                </div>
+                <br/>
+                <h5>Carregando Produto...</h5>
+            </div>
+        </div>
+        <div class="modal-content" *ngIf="!isLoadingItem">
+            <div class="modal-header">
+                <h5 class="modal-title">{{produto.nome}}</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="/assets/{{produto.foto}}" class="img-fluid" />
+                    </div>
+                    <div class="col-md-7">
+                        <div class="mt-4">
+                            <h5>Preço: <strong>{{produto.preco
+                                    | currency : 'R$ '}}</strong></h5>
+                            Quantidade disponível: 
+                            <strong>{{produto.quantidade}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm  btn-outline-secondary" data-dismiss="modal">Fechar</button>
+                <button class="btn btn-sm btn-success" (click)="adicionarItem(produto)">
+                    Adicionar ao Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

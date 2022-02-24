@@ -1,0 +1,74 @@
+<div class="container main-container">
+<h5>Minha cesta de compras</h5>
+<hr />
+<div *ngIf="valorTotal == 0 && quantidadeItens == 0" class="alert alert-secondary">
+    <strong>Sua cesta de compras está vazia</strong>
+    <hr>
+    Acesse a <a href="/">página de produtos</a> para adicionar produtos na sua cesta.
+</div>
+
+<div *ngIf="valorTotal > 0 && quantidadeItens > 0">
+    <div class="row">
+        <div class="col-md-6">
+            <h6>Valor total da cesta: 
+            <strong>{{valorTotal | currency : 'R$ '}}</strong></h6>
+            <span>Quantidade de itens adicionados: <strong>{{quantidadeItens}}</strong></span>
+            <br />
+            <br />
+        </div>
+
+    <div class="col-md-6 text-end">
+        <button class="btn btn-outline-danger btn-sm" (click)="limparCesta()">
+            Limpar cesta de compras
+        </button>
+    
+    </div>
+</div>
+
+<table class="table table-bordered table-stripped table-hover">
+    <thead>
+        <tr>
+            <th>Foto</th>
+            <th>Nome do produto</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+            <th>Operações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of produtos">
+            <td width="80">
+                <img src="/assets/{{item.foto}}" class="img-fluid"/>
+            </td>
+            <td width="500">{{item.nome}}</td>
+            <td class="text-end">{{item.preco | currency : 'R$ '}}</td>
+            <td class="text-end">{{item.quantidade}}</td>
+            <td class="text-end">{{(item.preco * item.quantidade) | currency : 'R$ '}}</td>
+            <td width="120" class="text-center">
+                <button class="btn btn-outline-danger" 
+                   (click)="diminuirItem(item)">
+                    
+                    -
+                </button>
+                &nbsp;
+                <button class="btn btn-outline-primary"
+                (click)="aumentarItem(item)">
+                    +
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="text-end" colspan="3">Total:</td>
+            <td class="text-end">{{quantidadeItens}}</td>
+            <td class="text-end">
+                   {{valorTotal | currency : 'R$ '}}
+            </td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+</div>
+</div>

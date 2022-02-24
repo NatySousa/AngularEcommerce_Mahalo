@@ -1,0 +1,66 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/home']"> <img src="/assets/mahalo.png" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" [routerLink]="['/register']">Crie sua Conta</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" [routerLink]="['/login']">Acesse sua Conta</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" [routerLink]="['/address']">Cadastro de Endereço</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/products']">Produtos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/shopping-cart']">Minha cesta de compras</a>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          &nbsp;&nbsp;
+          <a class="btn btn-success btn-sm mt-2" [routerLink]="['/checkout']">
+            Finalizar Pedido&nbsp;(<strong>{{cliente.nome}}</strong>)
+          </a>
+          &nbsp;&nbsp;
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="mt-4 container">
+
+  <div class="card mb-4" *ngIf="isLoggedIn">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <strong>CLIENTE AUTENTICADO:</strong>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          {{cliente.nome}}
+        </div>
+        <div class="col-md-3">
+          email: {{cliente.email}}
+        </div>
+        <div class="col-md-2">
+          cpf:{{cliente.cpf}}
+        </div>
+        <div class="col-md-4 text-end">
+             
+          &nbsp;
+          <button class="btn btn-sm btn-outline-danger" (click)="logout()">
+            Encerrar sessão
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FIM Navigation -->

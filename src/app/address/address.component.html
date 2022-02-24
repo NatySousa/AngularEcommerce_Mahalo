@@ -1,0 +1,116 @@
+<!-- Page Content -->
+<div class="container">
+    <div *ngIf="mensagemSucesso"  class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong></strong>{{mensagemSucesso}}
+        <button type="button" class="close" aria-label="Close" (click)="limparMensagens"></button>
+      </div>
+
+      <div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong></strong>{{mensagemErro}}
+        <button type="button" class="close" aria-label="Close"(click)="limparMensagens"></button>
+      </div>
+      
+    <h5>Crie sua conta de cliente</h5>
+
+    <div class="row mt-3">
+        <div class="col md-12">
+
+            <form [formGroup]="formAddress" (ngSubmit)="onSubmit()" autocomplete="off">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label>Endereço:</label>
+                        <input type="text" class="form-control" formControlName="logradouro" />
+                        <span class="text-danger" *ngIf="form.logradouro.touched && form.logradouro.invalid">
+                            <span *ngIf="form.logradouro.errors.required">
+                                Por favor, informe o endereço.
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Número:</label>
+                        <input type="text" class="form-control" formControlName="numero"/>
+                        <span class="text-danger" *ngIf="form.numero.touched && form.numero.invalid">
+                            <span *ngIf="form.numero.errors.required">
+                                Por favor, informe o número.
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Complemento:</label>
+                        <input type="text" class="form-control" formControlName="complemento"  />
+                        <span class="text-danger" *ngIf="form.complemento.touched && form.complemento.invalid">
+                            <span *ngIf="form.complemento.errors.required">
+                                Por favor, informe o complemento.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Bairro:</label>
+                        <input type="text" class="form-control" formControlName="bairro" />
+                        <span class="text-danger" *ngIf="form.bairro.touched && form.bairro.invalid">
+                            <span *ngIf="form.bairro.errors.required">
+                                Por favor, informe o bairro.
+                            </span>
+                        </span>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <label>Cidade:</label>
+                        <input type="text" class="form-control" formControlName="cidade" />
+                        <span class="text-danger"
+                            *ngIf="form.cidade.touched && form.cidade.invalid">
+                            <span *ngIf="form.cidade.errors.required">
+                                Por favor, informe a cidade.
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Estado:</label>
+                        <input type="text" class="form-control" formControlName="estado" />
+                        <span class="text-danger" *ngIf="form.estado.touched && form.estado.invalid">
+                            <span *ngIf="form.estado.errors.required">
+                                Por favor, informe o estado.
+                            </span>
+                        </span>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <label>Cep:</label>
+                        <input type="text" class="form-control" formControlName="cep" />
+                        <span class="text-danger"
+                            *ngIf="form.cep.touched && form.cep.invalid">
+                            <span *ngIf="form.cep.errors.required">
+                                Por favor, informe o cep.
+                            </span>
+                            <span *ngIf="form.cep.errors.pattern">
+                                Informe somente os 8 dígitos .
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="submit" value="Cadastrar Endereco" class="btn btn-success"/>
+                            <!-- [disabled]="!formRegister.valid"  -->
+                        &nbsp;
+                        <input type="button" value="Cancelar" class="btn btn-secondary" />
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
